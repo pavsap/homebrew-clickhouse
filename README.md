@@ -32,6 +32,7 @@ brew services info clickhouse-server
 
 # Manual start (without service)
 clickhouse server --config-file=/opt/homebrew/etc/clickhouse-server/config.xml
+```
 
 ### Test Installation
 
