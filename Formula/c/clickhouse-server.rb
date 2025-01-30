@@ -1,9 +1,9 @@
 class ClickhouseServer < Formula
   desc "Service wrapper for ClickHouse column-oriented database"
   homepage "https://clickhouse.com/"
-  url "https://github.com/ClickHouse/ClickHouse/releases/download/v24.12.3.47-stable/clickhouse-macos-aarch64"
-  version "24.12.2.29-stable"
-  sha256 "686612fbdf5d4a388bb37eb29150e3748fbbe4b1a128d7c97a9890fb94d085c8"
+  url "https://github.com/ClickHouse/ClickHouse/releases/download/v25.1.1.4165-stable/clickhouse-macos-aarch64"
+  version "25.1.1.4165-stable"
+  sha256 "217390ffa7103d1617a6e16d96f99d0e7cda83bb7e0cb0b6481c5ae0d78ae49c"
   license "Apache-2.0"
 
   def install
