@@ -1,9 +1,9 @@
 class ClickhouseServer < Formula
   desc "Service wrapper for ClickHouse column-oriented database"
   homepage "https://clickhouse.com/"
-  url "https://github.com/ClickHouse/ClickHouse/releases/download/v25.1.1.4165-stable/clickhouse-macos-aarch64"
-  version "25.1.1.4165-stable"
-  sha256 "217390ffa7103d1617a6e16d96f99d0e7cda83bb7e0cb0b6481c5ae0d78ae49c"
+  url "https://raw.githubusercontent.com/pavsap/homebrew-clickhouse/main/VERSION"
+  version "1.1"
+  sha256 "1523e9e982ff804c6d979e1bb2c6f3d7bae35307e8ce458bffc0d12a442b98da"
   license "Apache-2.0"
 
   def install
@@ -160,11 +160,11 @@ class ClickhouseServer < Formula
     assert_equal "1\n", output
 
     # Test if config files exist
-    assert_predicate etc/"clickhouse-server/config.xml", :exist?
-    assert_predicate etc/"clickhouse-server/users.xml", :exist?
+    assert_path_exists etc/"clickhouse-server/config.xml"
+    assert_path_exists etc/"clickhouse-server/users.xml"
 
     # Test if data directories exist with correct permissions
-    assert_predicate var/"lib/clickhouse/data", :directory?
-    assert_predicate var/"log/clickhouse-server", :directory?
+    assert_path_exists var/"lib/clickhouse/data"
+    assert_path_exists var/"log/clickhouse-server"
   end
 end
