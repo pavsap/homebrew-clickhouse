@@ -2,7 +2,7 @@ class ClickhouseServer < Formula
   desc "Service wrapper for ClickHouse column-oriented database"
   homepage "https://github.com/pavsap/homebrew-clickhouse"
   url "https://github.com/pavsap/homebrew-clickhouse/archive/refs/tags/v1.2.tar.gz"
-  sha256 "skip"
+  sha256 "c14457986ae002c77985c399f0379a7f41d23244d88174da5dfbf86751883998"
   license "Apache-2.0"
 
   def install
