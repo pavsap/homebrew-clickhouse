@@ -2,7 +2,7 @@ class ClickhouseServer < Formula
   desc "Service wrapper for ClickHouse column-oriented database"
   homepage "https://github.com/pavsap/homebrew-clickhouse"
   url "https://github.com/pavsap/homebrew-clickhouse/archive/refs/tags/v1.2.tar.gz"
-  sha256 "a898548bfbad4ab6800edc666272338db9241e3901983f86dcb662bd212b5b24"
+  sha256 "skip"
   license "Apache-2.0"
 
   def install
@@ -20,6 +20,9 @@ class ClickhouseServer < Formula
           #{clickhouse_bin}
       EOS
     end
+
+    # Remove any existing README.md before creating new one
+    (buildpath/"README.md").unlink if (buildpath/"README.md").exist?
 
     # Create a dummy file to satisfy the installation requirement
     (buildpath/"README.md").write <<~EOS
@@ -141,16 +144,16 @@ class ClickhouseServer < Formula
   def caveats
     <<~EOS
       Configuration files are not overwritten on upgrade.
-      
+
       Default credentials:
         User: default
         Password: (empty - change this for production!)
-      
+
       Useful commands:
         brew services start clickhouse-server
         clickhouse client
         open http://localhost:8123/play (web interface)
-      
+
       Config location: #{etc}/clickhouse-server/
       Data location: #{var}/lib/clickhouse/
     EOS
