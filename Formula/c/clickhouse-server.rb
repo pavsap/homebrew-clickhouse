@@ -170,15 +170,15 @@ class ClickhouseServer < Formula
   test do
     # Test if clickhouse binary exists and is functional
     assert system "which", "clickhouse"
-
-    # Test basic query functionality
-    output = shell_output("#{bin}/clickhouse local --query 'SELECT 1'")
+  
+    # Test basic query functionality using the system clickhouse, not bin/clickhouse
+    output = shell_output("clickhouse local --query 'SELECT 1'")
     assert_equal "1\n", output
-
+  
     # Test if config files exist
     assert_path_exists etc/"clickhouse-server/config.xml"
     assert_path_exists etc/"clickhouse-server/users.xml"
-
+  
     # Test if data directories exist with correct permissions
     assert_path_exists var/"lib/clickhouse/data"
     assert_path_exists var/"log/clickhouse-server"
