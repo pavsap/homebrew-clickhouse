@@ -1,9 +1,8 @@
 class ClickhouseServer < Formula
   desc "Service wrapper for ClickHouse column-oriented database"
-  homepage "https://clickhouse.com/"
-  url "https://raw.githubusercontent.com/pavsap/homebrew-clickhouse/main/VERSION"
-  version "1.1"
-  sha256 "1523e9e982ff804c6d979e1bb2c6f3d7bae35307e8ce458bffc0d12a442b98da"
+  homepage "https://github.com/pavsap/homebrew-clickhouse"
+  url "https://github.com/pavsap/homebrew-clickhouse/archive/refs/tags/v1.2.tar.gz"
+  sha256 "skip"
   license "Apache-2.0"
 
   def install
@@ -54,7 +53,7 @@ class ClickhouseServer < Formula
       <?xml version="1.0"?>
       <clickhouse>
           <logger>
-              <level>trace</level>
+              <level>information</level>
               <log>#{var}/log/clickhouse-server/clickhouse-server.log</log>
               <errorlog>#{var}/log/clickhouse-server/clickhouse-server.err.log</errorlog>
           </logger>
@@ -134,12 +133,26 @@ class ClickhouseServer < Formula
     chmod 0750, var/"run/clickhouse-server"
   end
 
+  def validate_config
+    config_file = etc/"clickhouse-server/config.xml"
+    system "clickhouse", "server", "--config-file=#{config_file}", "--check-config"
+  end
+
   def caveats
     <<~EOS
       Configuration files are not overwritten on upgrade.
-      To use new configuration files, backup and remove the existing ones:
-        #{etc}/clickhouse-server/config.xml
-        #{etc}/clickhouse-server/users.xml
+      
+      Default credentials:
+        User: default
+        Password: (empty - change this for production!)
+      
+      Useful commands:
+        brew services start clickhouse-server
+        clickhouse client
+        open http://localhost:8123/play (web interface)
+      
+      Config location: #{etc}/clickhouse-server/
+      Data location: #{var}/lib/clickhouse/
     EOS
   end
 
@@ -152,7 +165,7 @@ class ClickhouseServer < Formula
   end
 
   test do
-    # Test if clickhouse binary exists
+    # Test if clickhouse binary exists and is functional
     assert system "which", "clickhouse"
 
     # Test basic query functionality
